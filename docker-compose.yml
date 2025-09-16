@@ -2,14 +2,14 @@ services:
   backend:
     build: ./backend
     ports:
-      - "8080:8080"
+      - "5000:5000"
     environment:
       - DB_HOST=db
       - DB_PORT=3306
       - DB_NAME=myapp
       - DB_USER=root
       - DB_PASSWORD=password
-      - PORT=8080
+      - PORT=5000
     depends_on:
       - db
     networks:
@@ -18,7 +18,7 @@ services:
   frontend:
     build: ./frontend
     ports:
-      - "5173:5173"
+      - "3000:5173"
     depends_on:
       - backend
     networks:
@@ -33,13 +33,18 @@ services:
       - "3306:3306"
     volumes:
       - db_data:/var/lib/mysql
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+      interval: 5s
+      timeout: 10s
+      retries: 10
     networks:
       - app-network
 
   adminer:
     image: adminer
     ports:
-      - "8081:8080"
+      - "8080:8080"
     environment:
       ADMINER_DEFAULT_SERVER: db
     depends_on:
