@@ -1,0 +1,14 @@
+my-app/
+├── backend/
+│   ├── go.mod
+│   ├── main.go
+│   ├── Dockerfile
+│   └── models/
+├── frontend/
+│   ├── package.json
+│   ├── vite.config.js
+│   ├── tailwind.config.js
+│   ├── Dockerfile
+│   └── src/
+├── docker-compose.yml
+└── .env
